@@ -10,6 +10,15 @@ let test: User = {
     name: '테스트'
 }
 
+let test1 = {
+    age: "스트링",
+    name: '테스트'
+}
+
+
+function a(test) {
+    console.log(test.age)
+}
 // 함수에 활용한 인터페이스
 
 function getUser(user: User) {
@@ -66,11 +75,11 @@ interface Person {
     age: number;
 }
 
-interface Developer extends Person{
+interface Developer1 extends Person{
     language: string;
 }
 
-let hw: Developer = {
+let hw: Developer1 = {
     language: 'hi',
     name: 'hel',
     age: 10
