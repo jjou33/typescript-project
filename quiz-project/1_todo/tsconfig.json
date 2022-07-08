@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "checkJs": true,
-    "noImplicitAny": false
+    "noImplicitAny": true // 타입을 정의해주었는지 체크하는 부분
   },
   "include": ["./src/**/*"]
 }

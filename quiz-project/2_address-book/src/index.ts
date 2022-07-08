@@ -65,7 +65,7 @@ class AddressBook {
 
   fetchData() {
     fetchContacts().then(response => {
-      this.contacts = response;
+      // this.contacts = response;
     });
   }
 
