@@ -100,7 +100,7 @@ interface LengthType {
 // LengthType 을 extends 받기 때문에 T 는 항상 length 라는 타입을 알고 있을 것이다.
 // 따라서, 이때는 오류는 나지않는다.
 function logTextLength2<T extends LengthType>(text: T): T {
-  console.log(text.length);
+  console.log(text.);
   return text;
 }
 
@@ -114,7 +114,7 @@ interface ShoppingItem {
   stock: number;
 }
 
-// keyof 를 활용해서 shoppingItem 인터페이스 중 하나만 들어갈 수 있다는 정의
+// keyof 를 활용해서 shoppingItem 인터페이스 중 하나만 들어갈 수 있도록 제약
 function getShoppingItemOption<T extends keyof ShoppingItem>(itemOption: T): T {
   return itemOption;
 }
