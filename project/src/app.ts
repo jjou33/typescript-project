@@ -1,23 +1,24 @@
 // utils
-function $(selector) {
+function $(selector: string) {
   return document.querySelector(selector);
 }
-function getUnixTimestamp(date) {
+
+function getUnixTimestamp(date: Date) {
   return new Date(date).getTime();
 }
 
 // DOM
-const confirmedTotal = $('.confirmed-total');
-const deathsTotal = $('.deaths');
-const recoveredTotal = $('.recovered');
-const lastUpdatedTime = $('.last-updated-time');
+const confirmedTotal = $('.confirmed-total') as HTMLParagraphElement;
+const deathsTotal = $('.deaths') as HTMLParagraphElement;
+const recoveredTotal = $('.recovered') as HTMLParagraphElement;
+const lastUpdatedTime = $('.last-updated-time') as HTMLParagraphElement;
 const rankList = $('.rank-list');
 const deathsList = $('.deaths-list');
 const recoveredList = $('.recovered-list');
 const deathSpinner = createSpinnerElement('deaths-spinner');
 const recoveredSpinner = createSpinnerElement('recovered-spinner');
 
-function createSpinnerElement(id) {
+function createSpinnerElement(id: string) {
   const wrapperDiv = document.createElement('div');
   wrapperDiv.setAttribute('id', id);
   wrapperDiv.setAttribute(
@@ -41,7 +42,12 @@ function fetchCovidSummary() {
   return axios.get(url);
 }
 
-function fetchCountryInfo(countryCode, status) {
+enum CovidStatus {
+  Confirmed = 'confirmed',
+  Recoverd = 'recoverd',
+  Deaths = 'deaths',
+}
+function fetchCountryInfo(countryCode: string, status: CovidStatus) {
   // params: confirmed, recovered, deaths
   const url = `https://api.covid19api.com/country/${countryCode}/status/${status}`;
   return axios.get(url);
@@ -76,14 +82,17 @@ async function handleListClick(event) {
   clearRecoveredList();
   startLoadingAnimation();
   isDeathLoading = true;
-  const { data: deathResponse } = await fetchCountryInfo(selectedId, 'deaths');
+  const { data: deathResponse } = await fetchCountryInfo(
+    selectedId,
+    CovidStatus.Deaths
+  );
   const { data: recoveredResponse } = await fetchCountryInfo(
     selectedId,
-    'recovered'
+    CovidStatus.Recoverd
   );
   const { data: confirmedResponse } = await fetchCountryInfo(
     selectedId,
-    'confirmed'
+    CovidStatus.Confirmed
   );
   endLoadingAnimation();
   setDeathsList(deathResponse);
